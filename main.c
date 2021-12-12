@@ -6,7 +6,7 @@
  */
 
 #include "main.h"
-// Testtest Nico test test test test
+// Testtest Nico test test test
 
 
 int Execute_Q3(char* command, ssize_t size){
