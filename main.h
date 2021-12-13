@@ -25,7 +25,5 @@ int main(void);
 
 //Q1
 void Init(void);
-int main_Q1(void);
 //Q2
-int main_Q2(void);
-int Execute_Q2(char*,ssize_t);
+int Execute(char*,ssize_t);
