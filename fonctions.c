@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 void Init(){
 	write(1,"$ ./enseash\n",strlen("$ ./enseash\n"));
 	write(1,"Bienvenue sur le Shell de l'ENSEA.\n",strlen("Bienvenue sur le Shell de l'ENSEA.\n"));
@@ -8,7 +7,10 @@ void Init(){
 	write(1,"enseash % ",strlen("enseash % "));
 }
 
-int main_Q1(){
-	Init();
-	return 0;
+
+int Execute(char* command, ssize_t size){
+
+	write(1,"Today is what happened to yesterday.\n",strlen("Today is what happened to yesterday.\n"));
+
+	return 0; // Sortie de la fonction
 }
