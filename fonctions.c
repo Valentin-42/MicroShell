@@ -14,19 +14,21 @@ int Execute(char* command, ssize_t size){
 
 	if(size == 0){
 		write(1,"Closing...\n",strlen("Closing...\n"));
-		return 1; // Sortie de la fonction
+		kill(getpid(),SIGINT);
+		return 1; 									// Sortie de la fonction
 	}
 	else{
-
-		strncpy(command_adapt,command,size-1); 	//Copie les size premier caracteres de la command dans le tableau fortune
-		if(strcmp(command_adapt,"exit") == 0){ 	//Compare la chaine fortune avec le tableau créé.
+		strncpy(command_adapt,command,size-1);		//Copie les size premier caracteres de la command dans le tableau fortune
+		if(strcmp(command_adapt,"exit") == 0){ 		//Compare la chaine fortune avec le tableau créé.
 			write(1,"Closing...\n",strlen("Closing...\n"));
-			return 1; 						// Sortie de la fonction
+			kill(getpid(),SIGINT);
+			return 1; 								// Sortie de la fonction
 		}
 
 		else{
 			write(1,"Command unknown\n",strlen("Command unknown\n"));
 			write(1,command,size);
+			exit(1);
 			return 0;
 		}
 	}
