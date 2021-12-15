@@ -18,9 +18,9 @@ int main(){
 	while(exit==0){
 		memset(command,0,BUFF_SIZE); 					//remise a zero du tableau
 		size = read(1,command,BUFF_SIZE); 				//Ecoute d'une commande
-		exit = Execute(command,size); 				//Execution
-		if(size != 0){
-			lseek(1,0,SEEK_SET); 							//remise du curseur en debut de fichier
+		exit = Execute(command,size); 				//Traitement
+		if(exit == 0){
+			lseek(1,0,SEEK_SET); 							//remise du curseur en debut de fichier si loop
 			write(1,"enseash % ",strlen("enseash % ")); 	//Loop
 		}
 

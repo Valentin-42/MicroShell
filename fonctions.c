@@ -7,12 +7,14 @@ void Init(){
 	write(1,"enseash % ",strlen("enseash % "));
 }
 
-
+/*
+ * Gere le exit et le ctrl +D pour fermer le process enseash.
+ * */
 int Execute(char* command, ssize_t size){
 	char command_adapt[size];
 	memset(command_adapt,0,size); 					//remise a zero du tableau
 
-	if(size == 0){
+	if(size == 0){ // EOF <=> CTRL +D
 		write(1,"Closing...\n",strlen("Closing...\n"));
 		return 1; // Sortie de la fonction
 	}

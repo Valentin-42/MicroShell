@@ -5,11 +5,6 @@
  *      Author: ensea
  */
 
-#ifndef MAIN_H_
-#define MAIN_H_
-
-#endif /* MAIN_H_ */
-
 //Constantes
 #define BUFF_SIZE 100
 
@@ -20,8 +15,6 @@
 
 //Prototypes
 int main(void);
-
-
 
 //Q1
 void Init(void);
