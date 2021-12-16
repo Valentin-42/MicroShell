@@ -23,21 +23,27 @@ int main(){
 		memset(command,0,BUFF_SIZE); 					//remise a zero du tableau
 		size = read(1,command,BUFF_SIZE); 				//Ecoute d'une commande
 
+
 		pid = fork();									//Creation d'un fils traitant la commande
 		if(pid == 0){ 									//Processus Fils
 			exit = Execute(command,size); 				//Execution
 		}
 		else{ 											//Processus Père
+			struct timespec start,stop;
+			clock_gettime( CLOCK_REALTIME, &start);
+			double time_duration;
 			wait(&status);
-			if(WIFEXITED(status)==1){					//Le processus fils s'est terminé correctement
-				lseek(1,0,SEEK_SET); 	 								//remise du curseur en debut de fichier
-				sprintf(affichage,"code exit : %d\n",WEXITSTATUS(status));   //Récuperation du code
-				write(1,affichage,strlen(affichage)); 					//Loop : Attente d'une nouvelle commande
-				write(1,"enseash % ",strlen("enseash % ")); 			//Loop : Attente d'une nouvelle commande
+			clock_gettime( CLOCK_REALTIME, &stop);
+			time_duration = stop.tv_nsec - start.tv_nsec;
+
+			if(WIFEXITED(status)==1){										//Le processus fils s'est terminé correctement
+				lseek(1,0,SEEK_SET); 	 									//remise du curseur en debut de fichier
+				sprintf(affichage,"enseash [sign:%d|%.2fms] %%",WEXITSTATUS(status),time_duration/1e6);   //Formattage de l'affichage
+				write(1,affichage,strlen(affichage));						// LOOP
 			}
-			else if(WIFSIGNALED(status) == 1){					      //Le processus fils s'est mal terminé
-				sprintf(affichage,"signal exit : %d\n",WTERMSIG(status));   //Récuperation du code d'erreur
-				write(1,affichage,strlen(affichage)); 				//Affichage
+			else if(WIFSIGNALED(status) == 1){					      		//Le processus fils s'est mal terminé
+				sprintf(affichage,"enseash [exit %d|%.2fms] %%",WTERMSIG(status),time_duration/1e6);   //Formattage de l'affichage
+				write(1,affichage,strlen(affichage));						// LOOP
 				kill(getpid(),SIGINT);
 			}
 

@@ -9,6 +9,7 @@ void Init(){
 
 
 int Execute(char* command, ssize_t size){
+
 	char command_adapt[size];
 	memset(command_adapt,0,size); 					//remise a zero du tableau
 
@@ -27,7 +28,6 @@ int Execute(char* command, ssize_t size){
 
 		else{
 			write(1,"Command unknown\n",strlen("Command unknown\n"));
-			write(1,command,size);
 			exit(1);
 			return 0;
 		}
