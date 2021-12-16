@@ -12,6 +12,8 @@
 int main(){
 
 	char command[BUFF_SIZE]={0};
+
+	int i=0;
 	char affichage[BUFF_SIZE]={0};
 	int exit=0;
 	ssize_t size;
@@ -22,8 +24,6 @@ int main(){
 	while(exit==0){
 		memset(command,0,BUFF_SIZE); 					//remise a zero du tableau
 		size = read(1,command,BUFF_SIZE); 				//Ecoute d'une commande
-
-
 		pid = fork();									//Creation d'un fils traitant la commande
 		if(pid == 0){ 									//Processus Fils
 			exit = Execute(command,size); 				//Execution

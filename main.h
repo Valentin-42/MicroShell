@@ -28,3 +28,5 @@ int main(void);
 void Init(void);
 //Q2
 int Execute(char*,ssize_t);
+//Q3
+char* Adapt_command(char*,char*[]);

@@ -27,10 +27,48 @@ int Execute(char* command, ssize_t size){
 		}
 
 		else{
-			write(1,"Command unknown\n",strlen("Command unknown\n"));
-			exit(1);
+			//char* argv[3] = {"ls",(char*) NULL," "};
+			char* argv[BUFF_SIZE];
+			char* file = Adapt_command(command,argv);
+
+			if(execvp(file,argv) == -1){
+				write(1,"Command unknown\n",strlen("Command unknown\n"));
+				write(1,file,strlen(file));
+				write(1,"\n",strlen("\n"));
+				exit(1);
+			}
+
 			return 0;
 		}
 	}
 
+}
+
+
+char* Adapt_command(char* command, char* argv[]){
+	int size = 0;
+	char* command_split = strtok(command,"\n");
+	char* file;
+	char* ptr = strtok(command_split," ");
+	while(ptr != NULL) //Calcul la taille du tableau des arguments
+	{
+		size+=1;
+		ptr = strtok(NULL," ");
+	}
+
+
+
+	ptr = strtok(command_split," ");
+	for(int i=0; i<size;i++){ //remplit argv
+		argv[i]= ptr;
+		ptr = strtok(NULL," ");
+		printf("%s",argv[i]);
+		printf("\n");
+	}
+
+	argv[size]= (char*) NULL;
+	file = argv[0];
+
+
+	return file;
 }
