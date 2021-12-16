@@ -31,12 +31,12 @@ int main(){
 			wait(&status);
 			if(WIFEXITED(status)==1){					//Le processus fils s'est terminé correctement
 				lseek(1,0,SEEK_SET); 	 								//remise du curseur en debut de fichier
-				sprintf(affichage,"code : %d\n",WEXITSTATUS(status));   //Récuperation du code
+				sprintf(affichage,"code exit : %d\n",WEXITSTATUS(status));   //Récuperation du code
 				write(1,affichage,strlen(affichage)); 					//Loop : Attente d'une nouvelle commande
 				write(1,"enseash % ",strlen("enseash % ")); 			//Loop : Attente d'une nouvelle commande
 			}
 			else if(WIFSIGNALED(status) == 1){					      //Le processus fils s'est mal terminé
-				sprintf(affichage,"code : %d\n",WTERMSIG(status));   //Récuperation du code d'erreur
+				sprintf(affichage,"signal exit : %d\n",WTERMSIG(status));   //Récuperation du code d'erreur
 				write(1,affichage,strlen(affichage)); 				//Affichage
 				kill(getpid(),SIGINT);
 			}
