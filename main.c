@@ -12,8 +12,6 @@
 int main(){
 
 	char command[BUFF_SIZE]={0};
-
-	int i=0;
 	char affichage[BUFF_SIZE]={0};
 	int exit=0;
 	ssize_t size;

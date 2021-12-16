@@ -27,8 +27,8 @@ int Execute(char* command, ssize_t size){
 		}
 
 		else{
-			//char* argv[3] = {"ls",(char*) NULL," "};
-			char* argv[BUFF_SIZE];
+
+			char* argv[BUFF_SIZE]; //Tableau des arguments
 			char* file = Adapt_command(command,argv);
 
 			if(execvp(file,argv) == -1){
@@ -44,26 +44,20 @@ int Execute(char* command, ssize_t size){
 
 }
 
-
+/*
+ * Creer le tableau des arguments argv et le chemin vers la commande
+ * */
 char* Adapt_command(char* command, char* argv[]){
+
 	int size = 0;
 	char* command_split = strtok(command,"\n");
 	char* file;
 	char* ptr = strtok(command_split," ");
 	while(ptr != NULL) //Calcul la taille du tableau des arguments
 	{
+		argv[size]= ptr;
 		size+=1;
 		ptr = strtok(NULL," ");
-	}
-
-
-
-	ptr = strtok(command_split," ");
-	for(int i=0; i<size;i++){ //remplit argv
-		argv[i]= ptr;
-		ptr = strtok(NULL," ");
-		printf("%s",argv[i]);
-		printf("\n");
 	}
 
 	argv[size]= (char*) NULL;
