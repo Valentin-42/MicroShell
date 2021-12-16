@@ -18,8 +18,8 @@ int Execute(char* command, ssize_t size){
 		return 1; 									// Sortie de la fonction
 	}
 	else{
-		strncpy(command_adapt,command,size-1);		//Copie les size premier caracteres de la command dans le tableau fortune
-		if(strcmp(command_adapt,"exit") == 0){ 		//Compare la chaine fortune avec le tableau créé.
+		strncpy(command_adapt,command,size-1);		//Copie les size premier caracteres de la command dans le tableau command_adapt
+		if(strcmp(command_adapt,"exit") == 0){ 		//Compare la chaine command_adpat avec le tableau créé.
 			write(1,"Closing...\n",strlen("Closing...\n"));
 			kill(getpid(),SIGINT);
 			return 1; 								// Sortie de la fonction

@@ -10,6 +10,7 @@
 
 
 int main(){
+
 	char command[BUFF_SIZE]={0};
 	char affichage[BUFF_SIZE]={0};
 	int exit=0;
