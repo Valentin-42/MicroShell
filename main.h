@@ -19,6 +19,11 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <time.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 //Prototypes
 int main(void);
 
@@ -28,5 +33,9 @@ int main(void);
 void Init(void);
 //Q2
 int Execute(char*,ssize_t);
-//Q3
+//Q6
 char* Adapt_command(char*,char*[]);
+//Q7
+void Redirection_Ecriture(char* ptr);
+//Q8
+void Redirection_Lecture(char* ptr);
