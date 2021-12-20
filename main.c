@@ -34,7 +34,7 @@ int main(){
 			clock_gettime( CLOCK_REALTIME, &start);
 			wait(&status);								//Tant que le fils vie la commande est en cours d'execution et wait attend la fin du processus fils
 			clock_gettime( CLOCK_REALTIME, &stop);
-			time_duration = stop.tv_nsec - start.tv_nsec;	//Temps d'execution
+			time_duration = stop.tv_nsec - start.tv_nsec;	// Temps d'execution
 
 			if(WIFEXITED(status)==1){										//Le processus fils s'est terminé correctement
 				lseek(1,0,SEEK_SET); 	 									//remise du curseur en debut de fichier
