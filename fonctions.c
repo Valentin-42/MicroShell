@@ -55,15 +55,15 @@ char* Adapt_command(char* command, char* argv[]){
 	char* ptr = strtok(command_split," ");
 	while(ptr != NULL) //Remplissage des arguments.
 	{
-		if(strcmp(ptr,">") == 0){
-			ptr = strtok(NULL," ");
+		if(strcmp(ptr,">") == 0){			//Ajout du cas où on souhaite que le retour de la commande s'écrive dans un fichier autre que la console
+			ptr = strtok(NULL," ");			//on récupère l'adresse du fichier dans lequel écrire
 			Redirection_Ecriture(ptr);
 			break;
-		}else if(strcmp(ptr,"<") == 0){
-			ptr = strtok(NULL," ");
+		}else if(strcmp(ptr,"<") == 0){		//Ajout du cas où on souhaite éxecuter la commande contenue dans un fichier
+			ptr = strtok(NULL," ");			//On récupère l'adresse du ficher contenant la commande
 			Redirection_Lecture(ptr);
 			break;
-		}else{
+		}else{								//Si pas de redirection, fonctionnement classique du terminal
 			argv[size]= ptr;
 			size+=1;
 			ptr = strtok(NULL," ");
@@ -77,6 +77,8 @@ char* Adapt_command(char* command, char* argv[]){
 	return file;
 }
 
+
+//Ecriture de la commande dans le fichier donné en argument
 void Redirection_Lecture(char* ptr){
 	struct stat stat_buf;
 
@@ -85,7 +87,7 @@ void Redirection_Lecture(char* ptr){
 	}
 	else{
 		int fd = open(ptr,O_RDONLY,S_IRUSR);											//Ouverture du file 1
-		dup2(fd,STDIN_FILENO);															//Deviation
+		dup2(fd,STDIN_FILENO);															//Deviation du filedescripeur sur notre fichier
 		fclose(&ptr);
 	}
 
@@ -98,7 +100,7 @@ void Redirection_Ecriture(char* ptr){
 
 	if(stat(ptr, &stat_buf) == -1){ 										 //Le fichier n'existe pas
 		int fd = creat(ptr,S_IWUSR | S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); //Creation du fichier
-		dup2(fd,STDOUT_FILENO);												 //Deviation du filedescripteur sur stdout
+		dup2(fd,STDOUT_FILENO);												 //Deviation du filedescripteur sur notre  fichier
 	}
 	else{
 		dup2(fileno(ptr),STDOUT_FILENO);			//Deviation
