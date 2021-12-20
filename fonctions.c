@@ -7,7 +7,7 @@ void Init(){
 	write(1,"enseash % ",strlen("enseash % "));
 }
 
-//Pour le moment la fonction ne sert qu'à renvoyer un message simple dans le terminal
+//Pour le moment la fonction ne sert qu'à renvoyer un message simple dans le terminal.
 int Execute(char* command, ssize_t size){
 
 	write(1,"Today is what happened to yesterday.\n",strlen("Today is what happened to yesterday.\n"));
