@@ -31,7 +31,7 @@ int Execute(char* command, ssize_t size){
 			char* argv[BUFF_SIZE]; //Tableau des arguments
 			char* file = Adapt_command(command,argv);
 
-			if(execvp(file,argv) == -1){
+			if(execvp(file,argv) == -1){										//Si la commande n'est pas reconnue
 				write(1,"Command unknown\n",strlen("Command unknown\n"));
 				write(1,file,strlen(file));
 				write(1,"\n",strlen("\n"));
@@ -52,17 +52,17 @@ char* Adapt_command(char* command, char* argv[]){
 	int size = 0;
 	char* command_split = strtok(command,"\n");
 	char* file;
-	char* ptr = strtok(command_split," ");
+	char* ptr = strtok(command_split," ");			//Séparation de la commande et des arguments
 	while(ptr != NULL) //Calcul la taille du tableau des arguments
 	{
 		argv[size]= ptr;
 		size+=1;
-		ptr = strtok(NULL," ");
+		ptr = strtok(NULL," ");		//Séparation de la commande et des différents arguements pour les placer dans argv
 	}
 
-	argv[size]= (char*) NULL;
+	argv[size]= (char*) NULL;		//Ajout de l'éléments NULL après les arguments dans argv
 	file = argv[0];
 
 
-	return file;
+	return file;			//Renvoie de la commande
 }
