@@ -38,7 +38,7 @@ int main(){
 			else if(WIFSIGNALED(status) == 1){					      //Le processus fils s'est mal terminé
 				sprintf(affichage,"signal exit : %d\n",WTERMSIG(status));   //Récuperation du code d'erreur
 				write(1,affichage,strlen(affichage)); 				//Affichage
-				kill(getpid(),SIGINT);
+				kill(getpid(),SIGINT);								//Fin processus père
 			}
 
 		}

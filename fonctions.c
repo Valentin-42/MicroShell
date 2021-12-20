@@ -21,8 +21,8 @@ int Execute(char* command, ssize_t size){
 		strncpy(command_adapt,command,size-1);		//Copie les size premier caracteres de la command dans le tableau command_adapt
 		if(strcmp(command_adapt,"exit") == 0){ 		//Compare la chaine command_adpat avec le tableau créé.
 			write(1,"Closing...\n",strlen("Closing...\n"));
-			kill(getpid(),SIGTERM);
-			return 1; 								// Sortie de la fonction
+			kill(getpid(),SIGTERM);					//Fin processus fils par un signal
+			return 1;
 		}
 
 		else{
